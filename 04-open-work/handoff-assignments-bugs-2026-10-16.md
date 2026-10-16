@@ -7,7 +7,7 @@ Show the fix locally before pushing; open PRs, user merges.
 
 ## Bugs to fix (all must be done)
 
-1. **Generate Assignment asks for topic again** — FIXED locally (frontend), not pushed.
+1. **Generate Assignment asks for topic again** — FIXED (frontend), pushed to `wip/assignments-bug-1`.
    - Cause: AI topic used `title || chapter`, so "Chapter 5 Worksheet" beat the picked Chapter/Topic;
      the non-IB "Theme / Unit (optional)" box was never sent to the AI.
    - Fix: `hooks/useTaskSteps.ts` + `hooks/useIBGeneration.ts` → topic = `chapter || title`;
@@ -24,7 +24,7 @@ Show the fix locally before pushing; open PRs, user merges.
    - Also: for non-IB boards only steps come back (no Purpose/Outcomes/Word Bank) though UI promises them.
 
 3. **Drawing answers not graded** ("Could not fully read this submission – your teacher will review it")
-   — PARTLY fixed in service, not pushed, NOT yet tested.
+   — PARTLY fixed in service, pushed to `wip/assignments-bug-3`, NOT yet tested.
    - Cause (verified): Groq model `meta-llama/llama-4-maverick-17b-128e-instruct` returns 404
      model_not_found, so every image grade fails. Also old JSON cleanup regex
      ```` /```json[\s\S]*?```|```/ ```` deleted the whole fenced JSON block.
