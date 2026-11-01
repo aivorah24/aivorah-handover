@@ -15,13 +15,14 @@ Single place for the Aivorah engineering handover: system overview, access, runb
 
 | Folder | What's in it | Status |
 |---|---|---|
-| [01-overview](01-overview/) | Architecture, repos, environments, request flow | ✅ v1 |
+| [01-overview](01-overview/) | Architecture, repos, environments, request flow. Detailed maps in [`architecture/`](01-overview/architecture/) (moved from `aivorah-frontend/docs`) | ✅ v1 |
 | [02-access](02-access/) | Every account/platform, owner, what must be transferred | ✅ v1 |
 | [03-runbooks](03-runbooks/) | Deploy, rollback, migrations, key rotation, E2E | ⏳ todo |
 | [04-open-work](04-open-work/) | Open PRs, known bugs, tech debt, risks | ⏳ todo |
 | [05-decisions](05-decisions/) | ADRs — one file per significant decision | ⏳ todo |
 | [06-kt](06-kt/) | KT plan, session notes + recordings, sign-off | ⏳ todo |
 | [07-meetings](07-meetings/) | `YYYY-MM-DD-topic.md` meeting notes | template ready |
+| [08-archive](08-archive/) | Historical plans and checklists, kept for context only (may be out of date) | archive |
 | [status](status/) | Weekly handover status updates (newest = latest) | ✅ first update |
 
 ## Handover checklist
