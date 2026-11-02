@@ -16,3 +16,4 @@ Moved here from `aivorah-frontend/docs/`. Items marked "unconfirmed" or "sampled
 | `LEGACY_MIGRATION_AUDIT.md` | What still depended on the monolith (2026-09-21) |
 | `notifications/` | Notification system audit and V2 design / PR plan (2026-09-24) |
 | `diagrams/` | Mermaid sources (`.mmd`) for the architecture diagrams |
+| `QDRANT_COLLECTIONS.md` | What each Qdrant vector collection holds, who reads/writes it, gotchas |
