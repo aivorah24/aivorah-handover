@@ -40,7 +40,7 @@ _Last verified: 2026-10-14. GitHub org: `aivorah24` (all private)._
 
 | Folder | Note |
 |---|---|
-| `aivorah-school-admin-dashboard-service` | Exists only on the handover laptop — not a git repo, not deployed. Decide: push to org or delete. |
+| `aivorah-school-admin-dashboard-service` | **Deleted 2026-11-02.** Early local-only prototype (never on GitHub or Render, not called by the frontend). Its 3 endpoints (`/overview`, `/workspace-settings`, `/people`) live in `aivorah-school-admin-service`. |
 
 ## Local layout
 
