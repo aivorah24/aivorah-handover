@@ -1,0 +1,40 @@
+flowchart LR
+
+    subgraph Features
+        AuthFeature[Authentication]
+        ProfileFeature[Profile & Settings]
+        StudentFeature[Student Management]
+        AssignmentsFeature[Assignments]
+        LeaderboardFeature[Leaderboard]
+        LearningPathsFeature[Learning Paths]
+        MessagesFeature[Messages]
+        DailyHabitsFeature[Daily Habits]
+        ScheduleFeature[Schedule & Timetable]
+        LegacyFeature[Legacy 5E / Draw / Word]
+    end
+
+    subgraph Services
+        AuthSvc[Auth Service]
+        ProfileSvc[Profile Service]
+        StudentsSvc[Students Service]
+        AssignmentsSvc[Assignments Service]
+        LeaderboardSvc[Leaderboard Service]
+        LearningPathsSvc[Learning Paths Service]
+        MessagesSvc[Messages Service]
+        DailyHabitsSvc[Daily Habits Service]
+        ScheduleSvc[Schedule Service]
+        MonolithSvc[AI Mentor Monolith]
+    end
+
+    AuthFeature --> AuthSvc
+    ProfileFeature --> ProfileSvc
+    StudentFeature --> StudentsSvc
+    AssignmentsFeature --> AssignmentsSvc
+    AssignmentsFeature -.->|Validation / Legacy| MonolithSvc
+    LeaderboardFeature --> LeaderboardSvc
+    LearningPathsFeature --> LearningPathsSvc
+    LearningPathsFeature -.->|Fallback Prefetch| MonolithSvc
+    MessagesFeature --> MessagesSvc
+    DailyHabitsFeature --> DailyHabitsSvc
+    ScheduleFeature -.->|Frontend bypasses ScheduleSvc| MonolithSvc
+    LegacyFeature --> MonolithSvc
