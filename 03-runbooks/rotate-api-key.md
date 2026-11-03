@@ -9,7 +9,7 @@ Do this when a key leaks, expires, runs out of credit, or the account behind it 
 4. **Local `.env` files:** update your own copies; never commit them.
 5. **Check:** each service's `/health`, then use one feature that needs the key (e.g. upload a photo for Cloudinary, send an invite for Resend). Render → **Logs**: no auth errors (401/403).
 6. **Delete or revoke the old key** in the provider's console.
-7. **Record it:** one line in `status/` (date, which key, why). Never write the value anywhere.
+7. **Never write the key value** anywhere outside the provider and Render.
 
 ## Which services use which key
 | Env variable | Provider | Render services |

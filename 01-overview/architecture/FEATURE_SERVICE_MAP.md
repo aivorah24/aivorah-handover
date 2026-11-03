@@ -1,31 +1,33 @@
 # Feature → service map
 
-Which backend serves each frontend feature. Moved from an untracked `aivorah-frontend/docs/architecture/` draft (written 2026-09-21).
+Which backend serves each part of the app, and where the screens live in `aivorah-frontend`. Checked against `src/config/*ServerUrl.ts` and the screens' imports on 2026-11-03.
 
-Rows marked ✱ were re-checked against `aivorah-frontend` `src/config/*ServerUrl.ts` on 2026-11-02. Other rows were not re-verified, especially the "Legacy Monolith Dependency" column.
+"Also calls `ai-mentor`" = some calls in that feature still go to the old monolith at `aivorah.ai` (through `src/config/serverUrl.ts`). Moving those calls to the feature's own service is the way to retire the monolith.
 
-| Feature | Frontend | API | Current Backend | Database | External Services | Legacy Monolith Dependency |
-| ------- | -------- | --- | --------------- | -------- | ----------------- | -------------------------- |
-| Authentication | Auth & Onboarding UI | `AUTH_SERVER_URL` | `aivorah-auth-service` | Supabase, Firebase | - | No |
-| User Profile & Settings | Profile UI | `PROFILE_SERVER_URL` | `aivorah-profile-service` | Supabase | Cloudinary | No |
-| Students & Parents | Students / My Kids UI | `STUDENTS_SERVER_URL` / `PARENT_SERVER_URL` | `aivorah-students-service` | Supabase, Firebase | Groq | No |
-| Assignments | Assignments UI | `ASSIGNMENTS_SERVER_URL` | `aivorah-assignments-service` | Supabase, Qdrant | Groq, Gemini, Cloudinary | Partial (some validations/explain use monolith) |
-| Challenges | Challenges UI | `CHALLENGES_SERVER_URL` | `aivorah-challenges-service` | Supabase | - | No |
-| Leaderboard & Performance | Leaderboard UI | `LEADERBOARD_SERVICE_URL` | `aivorah-leaderboard-service` | Supabase, Qdrant | - | No |
-| Learning Paths | Learning Paths UI | `LEARNING_PATHS_SERVER_URL` | `aivorah-learning-paths-service` | Supabase, Qdrant, Firebase | Groq, Cloudinary | Partial (Curriculum fetching still uses Monolith) |
-| Messages & Channels | Messages UI | `MESSAGES_SERVER_URL` | `aivorah-messages-service` | Supabase | Groq, Cloudinary | Yes (Channels API uses `SERVER_URL`) |
-| Schedule ✱ | Schedule UI | `SCHEDULE_SERVER_URL` | `aivorah-schedule-service` | Supabase | - | No |
-| Timetable ✱ | Timetable UI | `TIMETABLE_RESOURCES_SERVER_URL` | `aivorah-timetable-resources-service` | Supabase | AI (PDF import) | No |
-| Daily Habits | Habits UI | `DAILY_HABITS_SERVER_URL` | `aivorah-daily-habits-service` | Supabase | - | No |
-| Bedtime Stories | Stories UI | `BEDTIME_STORIES_SERVER_URL` | `aivorah-bedtime-stories-service` | - | ElevenLabs, Groq | No |
-| AI Coach / Ask | Ask UI | `AI_COACH_SERVER_URL` | `aivorah-ai-coach-service` | Supabase, Qdrant | Groq | No (Re-routed through `SERVER_URL` variable name but mapped to coach) |
-| World and You | World & You UI | `WORLD_AND_YOU_SERVER_URL` | `aivorah-world-and-you-service` | Supabase | Groq | No (Tidbit quiz logic still uses monolith) |
-| School Admin ✱ | Admin UI | `SCHOOL_ADMIN_SERVER_URL` | `aivorah-school-admin-service` | Supabase, Qdrant | Groq, Cloudinary | Yes (Some parts use Monolith `/school-admin/*`) |
-| Teacher Dashboard | Teacher UI | `TEACHER_DASHBOARD_SERVER_URL` | `aivorah-teacher-dashboard-service` | Supabase, Qdrant | - | Partial |
-| Parental Controls | Parent UI | `PARENTAL_CONTROLS_SERVER_URL` | `aivorah-parental-controls-service` | Supabase | - | No |
-| Help Center | Help UI | `HELP_SERVICE_URL` | `aivorah-help-center-service` | - | Groq | No |
-| Legacy Learning Modules (5E, Draw) | Legacy UI | `SERVER_URL` | `ai-mentor` (Monolith) | Supabase, Qdrant | - | Yes |
-| Class Portfolio ✱ | Portfolio UI | `SCHOOL_ADMIN_SERVER_URL` | `aivorah-school-admin-service` | Supabase | Cloudinary | No |
-| Resources ✱ | Resources UI | `TIMETABLE_RESOURCES_SERVER_URL` | `aivorah-timetable-resources-service` | Supabase | - | No |
-| Attendance ✱ | Attendance UI | `ATTENDANCE_SERVER_URL` | `aivorah-attendance-service` | Supabase | - | No |
-| Platform Admin ✱ | Aivorah Admin UI | `PLATFORM_ADMIN_SERVER_URL` | `aivorah-platform-admin-service` | Supabase, Firebase | Gemini | No |
+| Feature | Frontend folder (`src/…`) | Main service | Also calls `ai-mentor` |
+|---|---|---|---|
+| Login, sign-up, email verify | `screens/auth/`, `context/AuthContext.tsx` | auth | Yes (verify email, password reset, role) |
+| Onboarding | `screens/onboarding/` | profile | Yes (mobile OTP) |
+| Profile, settings, photo | `screens/*/profile/`, `screens/*/settings/`, `screens/shared/account/` | profile | Yes (parent settings/profile, recovery email) |
+| Teacher roster, parent My Kids | `screens/teacher/students/`, `screens/parent/my-kids/` | students | No |
+| Parent dashboard, learning, AI report | `screens/parent/dashboard/`, `learning/`, `ai-progress-report/` | students, leaderboard | Yes (dashboard, learning) |
+| Assignments | `screens/teacher/assignments/`, `screens/student/assignments/`, `screens/parent/assignments/` | assignments | Yes (quiz library, quiz preview, explain) |
+| Learning paths and lessons | `screens/student/learning-paths/`, `lesson/`, `screens/teacher/learning-paths/`, `curriculum-learning-path/`, `subject-paths/` | learning-paths | Yes (curriculum lists) |
+| AI Coach | `screens/student/ai-coach/`, `components/common/*AIPanel.tsx` | ai-coach | Yes (feedback, suggestions, teacher/parent AI panels) |
+| Student dashboard, XP, leaderboard | `screens/student/dashboard/`, `leaderboard/`, `progress/` | leaderboard | Yes (dashboard subjects) |
+| Teacher dashboard and student progress | `screens/teacher/dashboard/`, `student-progress/` | teacher-dashboard | No |
+| Challenges | `screens/*/challenges/` | challenges | Yes (student quiz session) |
+| Messages, channels, notifications | `screens/shared/messages/`, `features/channels/`, `context/NotificationContext.tsx` | messages | No |
+| Schedule | `screens/student/schedule/`, `screens/teacher/schedule/` | schedule | Yes (student schedule) |
+| Timetable and resources | `screens/shared/timetable/`, `screens/shared/resources/` | timetable-resources | No |
+| Attendance and My Classes | `screens/*/attendance/`, `features/classes/` | attendance | Yes (connect to school) |
+| School admin | `screens/school-admin/` | school-admin | No |
+| Announcements, class portfolio | `screens/shared/announcements/`, `features/class-portfolio/` | school-admin | No |
+| Aivorah (platform) admin | `screens/aivorah-admin/` | platform-admin | No |
+| Parental controls, screen time | `screens/parent/parental-controls/`, `services/lockStatus.ts` | parental-controls | No |
+| Daily habits, daily tasks | `screens/student/daily-habits/`, `screens/parent/daily-tasks/` | daily-habits | No |
+| Bedtime stories | `screens/student/bedtime-stories/` | bedtime-stories | No |
+| World and You | `screens/student/world-and-you/` | world-and-you | No |
+| Help center | `screens/student/helpCenter/`, `screens/parent/help-center/`, `screens/shared/help-support/` | help-center | No |
+
+Service addresses and branches: [repositories.md](../repositories.md). Endpoints and env vars: each service's `README.md`.

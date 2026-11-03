@@ -26,7 +26,6 @@ Legend for "Transfer": 🔲 not done · ✅ done
 | ElevenLabs | Voice (stories, read aloud) | `ELEVENLABS_API_KEY` | Saimohan R | Account member | 🔲 |
 | LLM providers | AI features | Gemini, Groq, OpenRouter, Cerebras, NVIDIA NIM, (monolith: OpenAI, Anthropic, Mistral, HF, Deepgram) | Saimohan R | New keys under company account | 🔲 |
 | Razorpay | Payments (monolith only) | `RAZORPAY_*` | Saimohan R | Account member | 🔲 |
-| Domain / DNS | _TBD_ | _TBD_ | _TBD_ | — | 🔲 |
 
 > Many API keys (LLM, email) are on free tiers tied to personal accounts. During handover they should be **re-issued under a company-owned account**, then swapped in Render env vars.
 
@@ -63,12 +62,3 @@ Legend for "Transfer": 🔲 not done · ✅ done
 | ai-mentor/server (monolith) | `SUPABASE_*` `QDRANT_*` `FIREBASE_API_KEY` `ENCRYPTION_KEY` `RESEND_API_KEY` `EMAIL_*` `CLOUDINARY_*` `ELEVENLABS_*` `GOOGLE_*` (Calendar OAuth) `RAZORPAY_*` `FAST2SMS_API_KEY` `NEWS_API_KEY` + LLM keys (OpenAI, Anthropic, Gemini, Groq, OpenRouter, Mistral, NVIDIA, HF, Deepgram) |
 
 Source: `.env` / `.env.example` names in each repo on 2026-10-14. Render may have extra vars — Render is the source of truth.
-
-## Security checklist at sign-off
-
-| # | Action | How |
-|---|---|---|
-| 1 | Revoke the GitHub CLI token of the departing developer's personal GitHub account | GitHub → Settings → Applications → Authorized OAuth Apps → GitHub CLI → Revoke |
-| 2 | Turn on token checks for the school-admin service | Render → `aivorah-school-admin-service` → Environment → `AUTH_ENFORCE=enforce`, then test the School Admin screens |
-| 3 | Rotate shared keys into company-owned accounts (Cloudinary, Resend, Gmail app password, Qdrant, Groq, Gemini, ElevenLabs, Mistral, Hugging Face, NVIDIA, News API) | [rotate-api-key runbook](../03-runbooks/rotate-api-key.md) |
-| 4 | Remove departing accounts from GitHub, Vercel, Render, Supabase, Firebase and Qdrant | Each platform's member settings |

@@ -45,5 +45,4 @@ Read the error in Render → **Logs** at the time of the request:
 | Email | Resend dashboard → Logs (free plan: 100 emails a day) |
 
 ## 5. After it is fixed
-- Write one line in `status/` (what broke, cause, fix, time).
 - If it can happen again, add a row to the tables above.
