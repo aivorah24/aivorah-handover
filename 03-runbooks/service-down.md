@@ -31,7 +31,7 @@ Read the error in Render → **Logs** at the time of the request:
 | Error in logs | Cause | Fix |
 |---|---|---|
 | `401` / `403` from Supabase, or `Invalid API key` | Wrong or rotated key | Check the env var ([rotate-api-key.md](rotate-api-key.md)) |
-| `column … does not exist`, `violates check constraint` | Migration missing on Test | Apply it ([apply-db-migration.md](apply-db-migration.md)) |
+| `column … does not exist`, `violates check constraint` | A new migration was not applied to Test before the deploy | `node scripts/migrate.js test` ([apply-db-migration.md](apply-db-migration.md)) |
 | `402`, `429`, `quota`, `overloaded`, `no longer available` from an AI provider | Free AI quota used up or model retired | New key / billing / model name. See [bulk-upload-ai-providers.md](bulk-upload-ai-providers.md) |
 | Qdrant timeout or `Not found: Collection` | Free Qdrant cluster paused, or wrong collection | cloud.qdrant.io → cluster → resume. See `01-overview/architecture/QDRANT_COLLECTIONS.md` |
 | `auth/id-token-expired` or token errors locally | PC clock out of sync | Sync the system clock |

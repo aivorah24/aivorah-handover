@@ -6,7 +6,7 @@ Step-by-step instructions for routine jobs and emergencies. Each one says what t
 |---|---|
 | [deploy-backend-service.md](deploy-backend-service.md) | Shipping a change to any `aivorah-*-service` on Render |
 | [deploy-frontend.md](deploy-frontend.md) | Shipping a change to `aivorah-frontend` on Vercel |
-| [apply-db-migration.md](apply-db-migration.md) | Changing the database schema (`aivorah-db`) |
+| [apply-db-migration.md](apply-db-migration.md) | Changing the database schema (`aivorah-db`); Dev and Test are fully in sync |
 | [rotate-api-key.md](rotate-api-key.md) | A key leaked, expired, ran out of credit, or an account changes owner |
 | [service-down.md](service-down.md) | A service is down, slow, crashing or returning errors |
 | [bulk-upload-ai-providers.md](bulk-upload-ai-providers.md) | Teacher bulk upload / worksheet → quiz is slow or failing |

@@ -6,7 +6,7 @@ Every schema change is a numbered SQL file in `aivorah-db/supabase/migrations/` 
 |---|---|---|
 | Dev | `evlqkcozespsfrnuhevf` | local development |
 | **Test** | `xmwzifxlpmgsrxgxsgan` | **all live Render services (real users today)** |
-| Prod | `jwlepxmclbkrmfzrumch` | nothing yet (future production) |
+| Prod |  | nothing yet (future production) |
 
 The ledger table `public.schema_migrations` records which files ran (version + checksum).
 
