@@ -1,6 +1,6 @@
 # Architecture
 
-The full picture: the app, the 20 backend services grouped by area, and every data store and outside service they use. Built from the live Render settings and the code on 2026-11-03.
+The full picture: the app, the 20 backend services, and every data store and outside service they use. Built from the live Render settings and the code on 2026-11-03.
 
 ## System diagram
 
@@ -19,38 +19,31 @@ flowchart TB
 
     subgraph svcs["20 backend services · Node/Express · Render"]
         direction TB
-        subgraph acc["Accounts"]
-            direction LR
-            auth["auth"]
-            profile["profile"]
-            students["students"]
-            pctl["parental-controls"]
-        end
-        subgraph learn["Learning"]
-            direction LR
-            lps["learning-paths"]
-            asg["assignments"]
-            coach["ai-coach"]
-            chal["challenges"]
-            lb["leaderboard"]
-            tdash["teacher-dashboard"]
-        end
-        subgraph school["School"]
-            direction LR
-            sadmin["school-admin"]
-            att["attendance"]
-            ttr["timetable-resources"]
-            sched["schedule"]
-            msg["messages"]
-        end
-        subgraph extras["Extras and admin"]
-            direction LR
-            habits["daily-habits"]
-            stories["bedtime-stories"]
-            wy["world-and-you"]
-            help["help-center"]
-            padmin["platform-admin"]
-        end
+        auth["auth"]
+        profile["profile"]
+        students["students"]
+        parental_controls["parental-controls"]
+        learning_paths["learning-paths"]
+        assignments["assignments"]
+        ai_coach["ai-coach"]
+        challenges["challenges"]
+        leaderboard["leaderboard"]
+        teacher_dashboard["teacher-dashboard"]
+        school_admin["school-admin"]
+        attendance["attendance"]
+        timetable_resources["timetable-resources"]
+        schedule["schedule"]
+        messages["messages"]
+        daily_habits["daily-habits"]
+        bedtime_stories["bedtime-stories"]
+        world_and_you["world-and-you"]
+        help_center["help-center"]
+        platform_admin["platform-admin"]
+        auth ~~~ profile ~~~ students ~~~ parental_controls
+        learning_paths ~~~ assignments ~~~ ai_coach ~~~ challenges
+        leaderboard ~~~ teacher_dashboard ~~~ school_admin ~~~ attendance
+        timetable_resources ~~~ schedule ~~~ messages ~~~ daily_habits
+        bedtime_stories ~~~ world_and_you ~~~ help_center ~~~ platform_admin
     end
 
     sb[("Supabase Test DB<br/>Postgres + storage")]
