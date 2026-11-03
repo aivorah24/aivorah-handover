@@ -5,9 +5,9 @@ Single place for the Aivorah engineering handover: system overview, access, runb
 | | |
 |---|---|
 | **Handing over** | Saimohan R |
-| **Receiving** | _TBD_ |
+| **Receiving** | Maheswar, Teja |
 | **Started** | 2026-10-14 |
-| **Status** | 🟡 In progress — overview + access documented; KT not started |
+| **Status** | 🟡 KT in progress: architecture, access, runbooks and repo READMEs in place; access transfer and sign-off on 4–5 Nov |
 
 > **No secrets in this repo.** Only *where* a secret lives and *who* can grant it. See [02-access](02-access/access-inventory.md).
 
@@ -20,7 +20,7 @@ Single place for the Aivorah engineering handover: system overview, access, runb
 | [03-runbooks](03-runbooks/) | Deploy backend/frontend, DB migrations, key rotation, service down, bulk upload | ✅ v1 |
 | [04-open-work](04-open-work/) | Open PRs, known bugs, tech debt, risks | ⏳ todo |
 | [05-decisions](05-decisions/) | ADRs — one file per significant decision | ⏳ todo |
-| [06-kt](06-kt/) | KT plan, session notes + recordings, sign-off | ⏳ todo |
+| [06-kt](06-kt/) | KT plan, session notes + recordings, sign-off | [plan](06-kt/README.md) |
 | [07-meetings](07-meetings/) | `YYYY-MM-DD-topic.md` meeting notes | template ready |
 | [08-archive](08-archive/) | Historical plans and checklists, kept for context only (may be out of date) | archive |
 | [status](status/) | Weekly handover status updates (newest = latest) | ✅ first update |
@@ -30,7 +30,7 @@ Single place for the Aivorah engineering handover: system overview, access, runb
 - [x] System overview written
 - [x] Access inventory written
 - [ ] Access transferred / granted to receiver (per platform, see access inventory)
-- [ ] Monolith repo moved from personal GitHub account to `aivorah24` org
+- [x] Monolith repo moved to the `aivorah24` GitHub account
 - [ ] Runbooks written and dry-run by receiver
 - [ ] Open work list reviewed together
 - [ ] KT sessions completed (see `06-kt/`)
