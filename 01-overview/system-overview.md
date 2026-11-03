@@ -1,6 +1,6 @@
 # System overview
 
-_Last verified: 2026-10-14_
+_Last verified: 2026-11-03_
 
 ## What Aivorah is
 
@@ -25,12 +25,13 @@ graph TD
     SVC --> SB[(Supabase Postgres)]
     MONO --> SB
     SVC --> Q[(Qdrant vector DB)]
-    SVC --> LLM[LLM providers<br/>Gemini, Groq, OpenRouter, Cerebras, NVIDIA]
+    SVC --> LLM[AI providers<br/>Groq, Gemini, OpenRouter, Mistral, Hugging Face, NVIDIA]
     SVC --> EXT[Resend / Gmail SMTP, Cloudinary, ElevenLabs]
     DB[aivorah-db<br/>migrations + seeds] -. schema .-> SB
     E2E[aivorah-e2e-tests<br/>Playwright] -. tests .-> FE
 ```
 
+- **Full diagram** with every service and what it uses: [architecture/ARCHITECTURE.md](architecture/ARCHITECTURE.md).
 - **Frontend** calls each microservice directly; each service has its own URL file in `aivorah-frontend/src/config/*ServerUrl.ts`.
 - **Auth**: Firebase Auth on the client; services verify the Firebase ID token (`FIREBASE_SERVICE_ACCOUNT_B64`). Role/onboarding comes from `aivorah-auth-service` `/user/sync`.
 - **Data**: Supabase Postgres, accessed by services with the service-role key. Schema lives in `aivorah-db`.
