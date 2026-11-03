@@ -62,11 +62,3 @@ Legend for "Transfer": 🔲 not done · ✅ done
 | ai-mentor/server (monolith) | `SUPABASE_*` `QDRANT_*` `FIREBASE_API_KEY` `ENCRYPTION_KEY` `RESEND_API_KEY` `EMAIL_*` `CLOUDINARY_*` `ELEVENLABS_*` `GOOGLE_*` (Calendar OAuth) `RAZORPAY_*` `FAST2SMS_API_KEY` `NEWS_API_KEY` + LLM keys (OpenAI, Anthropic, Gemini, Groq, OpenRouter, Mistral, NVIDIA, HF, Deepgram) |
 
 Source: `.env` / `.env.example` names in each repo on 2026-10-14. Render may have extra vars — Render is the source of truth.
-
-## Security checklist at sign-off
-
-| # | Action | How |
-|---|---|---|
-| 1 | Turn on token checks for the school-admin service | Render → `aivorah-school-admin-service` → Environment → `AUTH_ENFORCE=enforce`, then test the School Admin screens |
-| 2 | Rotate shared keys into company-owned accounts (Cloudinary, Resend, Gmail app password, Qdrant, Groq, Gemini, ElevenLabs, Mistral, Hugging Face, NVIDIA, News API) | [rotate-api-key runbook](../03-runbooks/rotate-api-key.md) |
-| 3 | Remove departing accounts from GitHub, Vercel, Render, Supabase, Firebase and Qdrant | Each platform's member settings |

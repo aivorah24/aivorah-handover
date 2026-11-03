@@ -7,7 +7,7 @@ Single place for the Aivorah engineering handover: system overview, access, runb
 | **Handing over** | Saimohan R |
 | **Receiving** | Maheswar, Teja |
 | **Started** | 2026-10-14 |
-| **Status** | 🟡 KT in progress: architecture, access, runbooks and repo READMEs in place; access transfer and sign-off on 4–5 Nov |
+| **Status** | 🟡 KT in progress: architecture, access, runbooks and repo READMEs in place; access transfer on 4–5 Nov |
 
 > **No secrets in this repo.** Only *where* a secret lives and *who* can grant it. See [02-access](02-access/access-inventory.md).
 
@@ -30,4 +30,3 @@ Single place for the Aivorah engineering handover: system overview, access, runb
 - [ ] Open work list reviewed together
 - [ ] KT sessions completed
 - [ ] Receiver deploys one change end-to-end unaided
-- [ ] Sign-off by receiver and manager

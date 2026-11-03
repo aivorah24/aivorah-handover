@@ -11,7 +11,7 @@ What the team can pick up next, in rough order of value. Nothing here blocks the
 ## 2. Security hardening
 - **Token checks on every service.** Some services take the user's email from the request instead of checking the login token. School Admin has the check built in: turn it on with `AUTH_ENFORCE=enforce`. Others need a shared token check like the one in attendance and timetable-resources.
 - **Admin lists.** Admin email lists in `aivorah-platform-admin-service` (`middleware/auth.js`) and `aivorah-school-admin-service` (`services/adminScope.js`) contain individual emails. Keep only `ADMIN_EMAILS` from Render env vars.
-- **Key rotation** at sign-off: see the security checklist in `02-access/access-inventory.md`.
+- **Key rotation:** move shared keys to company-owned accounts; see `03-runbooks/rotate-api-key.md`.
 
 ## 3. Product improvements
 - **Teacher promote** should also move the curriculum at grade boundaries (IB PYP → IB MYP), the same way School Admin promote does (`aivorah-students-service`).
