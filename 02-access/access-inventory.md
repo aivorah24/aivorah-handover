@@ -1,6 +1,6 @@
 # Access inventory
 
-_Last verified: 2026-11-03_
+_Last verified: 2026-11-03. GitHub, Vercel, Render, Supabase and Firebase/Google Cloud ownership checked through each platform's API._
 
 **Rule: no secret values in this repo — ever.** This file says *what* access exists, *where* the secret lives, and *who* grants it. Secrets are handed over through a password manager / direct dashboard invite, never chat or email.
 
@@ -14,9 +14,9 @@ Legend for "Transfer": ✅ under the company account
 | GitHub | Monolith `ai-mentor` | `aivorah24/ai-mentor` | Company | Collaborator (same as above) | ✅ |
 | Vercel | Frontend hosting | Account `aivorah24-9470` (Hobby), project `aivorah-frontend` | Company | Team seat (needs Vercel Pro) or the company login | ✅ |
 | Render | All 20 services | Workspace "My Workspace" (`tea-d9u4igjm8hqs73egspbg`), login `aivorah24@gmail.com` | Company | Workspace member (needs Render Pro) or the company login; env vars live here | ✅ |
-| Supabase | Postgres DB | Dev `evlqkcozespsfrnuhevf`, Test `xmwzifxlpmgsrxgxsgan`, Prod `jwlepxmclbkrmfzrumch` | Company | Org member | ✅ |
-| Firebase | Auth (all users) | Project `ai-learning-platform-c1308` | Company | Project Owner/Editor | ✅ |
-| Google Cloud | Monolith (Cloud Run), Firebase backing project | Same Google account as Firebase | Company | IAM Owner/Editor | ✅ |
+| Supabase | Postgres DB | Org **Aivorah** → Prod `jwlepxmclbkrmfzrumch`; org **Aivorah - Dev and Test DB** → Dev `evlqkcozespsfrnuhevf`, Test `xmwzifxlpmgsrxgxsgan` | Company (`aivorah24@gmail.com` is Owner of both orgs) | Org member | ✅ |
+| Firebase | Auth (all users) | Project `ai-learning-platform-c1308` | Company (`aivorah24@gmail.com` is project Owner) | Project Owner/Editor | ✅ |
+| Google Cloud | Monolith (Cloud Run), Firebase backing project | Project `ai-learning-platform-c1308` | Company (`aivorah24@gmail.com` is Owner) | IAM Owner/Editor | ✅ |
 | Qdrant Cloud | Vector DB (`QDRANT_COLLECTIONS.md`) | Cluster `ai-mentor` in account "Base Account" | Company (moving) | `aivorah24@gmail.com` invited as Admin; set it to Owner once accepted | In progress (4 Nov) |
 | CircleCI | Frontend CI | Project `gh/aivorah24/aivorah-frontend` | Company | Org member; billing on a company card | ✅ |
 | GitLab | Fallback CI | — | Company | Member | ✅ |
