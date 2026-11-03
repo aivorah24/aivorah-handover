@@ -15,7 +15,7 @@ Single place for the Aivorah engineering handover: system overview, access, runb
 
 | Folder | What's in it | Status |
 |---|---|---|
-| [01-overview](01-overview/) | Architecture, repos, environments, request flow. Detailed maps in [`architecture/`](01-overview/architecture/) (moved from `aivorah-frontend/docs`) | ✅ v1 |
+| [01-overview](01-overview/) | System overview, repos and where they deploy, feature → service map, notifications, Qdrant | ✅ v1 |
 | [02-access](02-access/) | Every account/platform, owner, what must be transferred | ✅ v1 |
 | [03-runbooks](03-runbooks/) | Deploy backend/frontend, DB migrations, key rotation, service down, bulk upload | ✅ v1 |
 | [04-open-work](04-open-work/) | What to pick up next: decisions, security hardening, improvements, housekeeping | ✅ v1 |

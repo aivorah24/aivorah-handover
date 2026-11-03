@@ -58,5 +58,5 @@ Supabase projects: **Dev** `evlqkcozespsfrnuhevf`, **Test** `xmwzifxlpmgsrxgxsga
 ## More detail
 
 - [repositories.md](repositories.md) — every repo, what it does, where it deploys
-- [architecture/](architecture/) — repo, service and feature maps, data flow, Qdrant collections, notifications design
+- [architecture/](architecture/) — feature → service map, notifications, Qdrant collections
 - [../03-runbooks/](../03-runbooks/) — deploy, migrations, key rotation, service down

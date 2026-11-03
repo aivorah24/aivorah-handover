@@ -36,12 +36,6 @@ _Last verified: 2026-11-03. GitHub account: `aivorah24` (all repos private)._
 | `aivorah-daily-habits-service` | Daily habits, parent tasks | `master` → aivorah-daily-habits-service.onrender.com |
 | `aivorah-world-and-you-service` | Daily tidbits + quiz | `master` → aivorah-world-and-you-service.onrender.com |
 
-## Not on GitHub
-
-| Folder | Note |
-|---|---|
-| `aivorah-school-admin-dashboard-service` | **Deleted 2026-11-02.** Early local-only prototype (never on GitHub or Render, not called by the frontend). Its 3 endpoints (`/overview`, `/workspace-settings`, `/people`) live in `aivorah-school-admin-service`. |
-
 ## Local layout
 
 All repos are cloned side by side (e.g. `Desktop/<repo>`). Extra `wt-*` folders are temporary git worktrees, not separate repos.
