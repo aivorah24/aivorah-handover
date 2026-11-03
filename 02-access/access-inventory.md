@@ -24,7 +24,7 @@ Legend for "Transfer": ✅ under the company account
 | Gmail SMTP | Email fallback | `EMAIL_USER` / app password `EMAIL_PASS` | Company | New app password | ✅ |
 | Cloudinary | Image/file storage | `CLOUDINARY_*` | Company | Account member | ✅ |
 | ElevenLabs | Voice (stories, read aloud) | `ELEVENLABS_API_KEY` | Company | Account member | ✅ |
-| LLM providers | AI features | Gemini, Groq, OpenRouter, Cerebras, NVIDIA NIM, (monolith: OpenAI, Anthropic, Mistral, HF, Deepgram) | Company | New keys under company account | ✅ |
+| LLM providers | AI features | Gemini, Groq, OpenRouter, Cerebras, NVIDIA NIM (monolith also: OpenAI, Anthropic, Mistral, HF, Deepgram) | Keys are set in Render env vars | To use company-owned keys: create them under the company account and swap them in ([rotate-api-key runbook](../03-runbooks/rotate-api-key.md)) | Keys in Render |
 | Razorpay | Payments (monolith only) | `RAZORPAY_*` | Company | Account member | ✅ |
 
 > To change any provider key, follow `03-runbooks/rotate-api-key.md`.
