@@ -35,5 +35,3 @@ Do this when a key leaks, expires, runs out of credit, or the account behind it 
 - **Firebase service account:** create a new key in Firebase → Project settings → Service accounts, base64-encode the JSON, update the 8 services, then delete the old key there.
 - **Gmail app password:** Google Account → Security → App passwords → revoke old, create new.
 
-## Keys leaked and still to rotate (from the ai-mentor history clean-up, 2 Nov 2026)
-Cloudinary, Gmail app password, Resend, Qdrant, Groq (all 5), Gemini, ElevenLabs, Hugging Face, Mistral, NVIDIA NIM, News API. Supabase **Prod** service key also leaked; no live service uses Prod, so rotate it before production is built.

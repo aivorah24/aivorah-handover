@@ -7,7 +7,7 @@
 | Where | Vercel account `aivorah24-9470`, project `aivorah-frontend` |
 | Production branch | `master` |
 | Build | `npm run vercel-build` (Expo web export) → `dist/` |
-| CI | CircleCI `build_and_test` (lint, unit, integration, build). The `trigger-e2e` job currently fails for an infrastructure reason, not code |
+| CI | CircleCI `build_and_test` (lint, unit, integration, build) is the required check. `trigger-e2e` hands the preview to `aivorah-e2e-tests`; if it shows red, check its CircleCI API token |
 
 ## Steps
 1. **Branch and change.** `git checkout -b fix/<short-name>` from `master`.

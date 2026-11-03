@@ -15,22 +15,22 @@ Frontend: Teacher → Assignments → Bulk Upload (`aivorah-frontend`, `src/scre
 ## Configuration on Render (names only — values live in Render)
 | Variable | Value / meaning |
 |---|---|
-| `GEMINI_API_KEY` | Google AI Studio key (replaced 2026-10-28; old prepaid key had no credit) |
+| `GEMINI_API_KEY` | Google AI Studio key (main provider) |
 | `GEMINI_MODEL` | `gemini-3.6-flash,gemini-3.5-flash` — `gemini-2.5-flash` is closed to new keys |
 | `GEMINI_VISION_TIMEOUT_MS` | `90000` |
-| `GEMINI_TIMEOUT_WITH_FALLBACK_MS` | `90000` (was 30 s; Gemini's budget is the **smaller** of these two) |
+| `GEMINI_TIMEOUT_WITH_FALLBACK_MS` | `90000` (Gemini's time budget is the **smaller** of these two) |
 | `DOCUMENT_MAX_PAGES` | not set → default 3 (PR #18). Do not raise above 3 on the 512 MB plan |
-| `MISTRAL_API_KEY` | set, but account allows 0 requests/min (plan inactive) |
-| `HF_TOKEN` | set, free monthly credit used up |
-| `GROQ_API_KEY` | set (free tier) |
+| `MISTRAL_API_KEY` | Mistral fallback; needs an active Mistral plan to answer |
+| `HF_TOKEN` | Hugging Face fallback; uses the account's monthly credit |
+| `GROQ_API_KEY` | Groq, the last-resort text model |
 | `POC_FALLBACK_ENABLED` | `true` — test-only `/poc` routes, not used by Bulk Upload |
 
-## Known limitations (as of 2026-10-28)
-- **Speed:** 2–3 minutes per document while Gemini is busy/unavailable (free tier often answers "overloaded"). Fast (seconds) only when Gemini responds.
-- **AI availability:** Mistral inactive (0 req/min), Hugging Face out of credit, Gemini free tier overloaded at times. These are account/billing issues, not code.
-- **Pages:** only the first 3 pages go through local OCR. Gemini still sees every page when it works.
-- **Thin worksheets:** a 1-page worksheet with almost no text returned HTTP 200 with **0 tasks**. The UI should treat 0 tasks as a failure (pending, see below).
-- **Memory:** free plan is 512 MB. Two fixes are live (#17 one Chrome at a time + 1 warm OCR worker; #18 page cap).
+## How it behaves
+- **Speed:** a few seconds when Gemini answers; 2–3 minutes when it falls back to OCR + the other providers.
+- **Fallbacks:** each provider is tried in order until one answers. Which one answered shows in Render → Logs.
+- **Pages:** the first 3 pages (`DOCUMENT_MAX_PAGES`) go through local OCR; Gemini reads every page.
+- **Memory:** 512 MB on the current plan. One Chrome instance and one OCR worker run at a time, and the page cap keeps big PDFs within memory.
+- **Very thin worksheets** (almost no text) can produce a quiz with 0 tasks; ask the teacher for a clearer scan or a PDF with real text.
 
 ## Troubleshooting
 | Symptom | Likely cause | Check / fix |
@@ -43,7 +43,7 @@ Frontend: Teacher → Assignments → Bulk Upload (`aivorah-frontend`, `src/scre
 | Logs: `Mistral … 429` | Mistral plan inactive / rate limit | console.mistral.ai → activate "Experiment" plan or add billing |
 | Logs: `HF router 402` | Hugging Face credit used up | Buy credit or HF PRO; resets monthly (small) |
 
-## If the AI quota is exhausted — steps
+## When an AI provider stops answering
 1. Render → assignments service → **Logs**: find the provider error (402 / 429 / 503 / "no longer available").
 2. Fix the account (top up, new key, activate plan) on the provider's site.
 3. Render → **Environment** (`https://dashboard.render.com/web/srv-d9uvv1u417fc7399o59g/env`) → update the variable → **Save, rebuild, and deploy**. (Not "New Environment Group".)
@@ -59,9 +59,8 @@ curl -s -F "pdf=@tests/fixtures/b02-ib-pyp-worksheet.pdf;type=application/pdf" -
 ```
 Then Render → **Events** (no `server_failed`) and **Logs** (which provider answered).
 
-## Pending (not done)
-- **Provider circuit breaker:** skip a provider for a while after quota/overload errors instead of trying it on every upload.
-- **0-task result:** frontend should show "couldn't read this worksheet" when the quiz has no tasks.
-- **Store the teacher's chosen language** on assignments (no `language` column; typing language is inferred).
-- **Account/billing:** Gemini paid tier or stable key, Mistral plan, Hugging Face credit — company decision.
-- **Rotate the Gemini key:** it was shared in a chat on 2026-10-28.
+## Ideas to improve
+- Skip a provider for a while after quota or overload errors, instead of trying it on every upload.
+- Show "couldn't read this worksheet" in the app when a quiz comes back with 0 tasks.
+- Store the teacher's chosen language on the assignment (today the typing language is inferred).
+- Put the AI providers on company-owned paid plans for steady speed.

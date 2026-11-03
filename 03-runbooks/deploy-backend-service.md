@@ -11,7 +11,7 @@ All 20 `aivorah-*-service` repos deploy the same way: Render builds and starts t
 
 ## Steps
 1. **Branch and change.** `git checkout -b fix/<short-name>` from the default branch.
-2. **Run the checks locally** (CI is billing-blocked, so this is the real gate):
+2. **Run the checks locally** before every PR:
    ```bash
    npm ci
    npm test
