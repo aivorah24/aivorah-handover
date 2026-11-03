@@ -1,49 +1,46 @@
-# Runbook: apply a database migration safely
+# Runbook: apply a database migration
 
-Every schema change is a numbered SQL file in `aivorah-db/supabase/migrations/` (e.g. `0019_notifications_assignment_feedback.sql`). Never change tables in the Supabase dashboard directly.
+Every schema change is a SQL file in `aivorah-db/supabase/migrations/`. `scripts/migrate.js` applies the files a project hasn't had yet and records each one in `public.schema_migrations` with a checksum. Never change tables in the Supabase dashboard directly.
 
 | Project | Ref | Used by |
 |---|---|---|
-| Dev | `evlqkcozespsfrnuhevf` | local development |
-| **Test** | `xmwzifxlpmgsrxgxsgan` | **all live Render services (real users today)** |
-| Prod |  | nothing yet (future production) |
+| Dev | `evlqkcozespsfrnuhevf` | development (free plan: resume it in the dashboard if paused) |
+| **Test** | `xmwzifxlpmgsrxgxsgan` | **all live Render services and real pilot users** |
+| Prod | `jwlepxmclbkrmfzrumch` | future production, not used yet |
 
-The ledger table `public.schema_migrations` records which files ran (version + checksum).
-
-## Known trap: the ledger is incomplete
-Some migrations were applied by hand without a ledger row (on Test, roughly `0007`–`0018`; `0019` is on Test but not on Dev). So **`node scripts/migrate.js test` would try to re-run old files** and can fail or duplicate data. Until the ledger is repaired, apply **one file at a time**, as below.
+**Status (3 Nov 2026):** Dev and Test have all 22 migrations applied and recorded. `migrate.js dev` and `migrate.js test` both report "already up to date". The next file is `0020_…`.
 
 ## Setup (once)
 ```bash
 cd aivorah-db
-npm ci
-cp .env.example .env   # set SUPABASE_ACCESS_TOKEN (supabase.com/dashboard/account/tokens), DEV_REF, TEST_REF, PROD_REF
+cp .env.example .env
+# SUPABASE_ACCESS_TOKEN = supabase.com/dashboard/account/tokens
+# DEV_REF, TEST_REF, PROD_REF = the refs in the table above
 ```
+Node 18+ is enough; there is nothing to install.
 
 ## Steps for a new migration
-1. **Write** `supabase/migrations/00NN_short_description.sql` (next number). Make it safe to re-run where possible (`if not exists`, `on conflict do nothing`).
-2. **Check the ledger** on the target project: Supabase → SQL Editor:
-   ```sql
-   select version from public.schema_migrations order by version;
+1. **Write** `supabase/migrations/0020_short_description.sql` (next free number). Prefer `if not exists` / `on conflict do nothing` so it is safe to re-run.
+2. **Apply to Dev:**
+   ```bash
+   node scripts/migrate.js dev
    ```
-3. **Apply to Dev first:** SQL Editor on Dev → paste the file → Run. Then record it:
-   ```sql
-   insert into public.schema_migrations (version, checksum)
-   values ('00NN_short_description', '<sha256 of the file>')
-   on conflict (version) do nothing;
+   It prints `apply 0020_…` then `Applied 1 migration(s)`.
+3. **Test the feature** against Dev.
+4. **Apply to Test** (live: do this before deploying the service that needs it):
+   ```bash
+   node scripts/migrate.js test
    ```
-   Get the checksum with: `node -e "const c=require('crypto'),f=require('fs');console.log(c.createHash('sha256').update(f.readFileSync(process.argv[1],'utf8').replace(/\r\n/g,'\n')).digest('hex'))" supabase/migrations/00NN_short_description.sql`
-4. **Test** the feature against Dev.
-5. **Apply to Test** the same way (step 3 on the Test project). Test is live: do it before deploying the service that needs it.
-6. **Run the repo tests:** `npm test`. Open a PR with the file, merge.
-7. **Deploy the service** that uses the change ([deploy-backend-service.md](deploy-backend-service.md)).
-
-`migrate.js` is safe to use **only** on a project whose ledger lists every file already applied.
+5. **Run the repo tests:** `npm test`. Open a PR with the file and merge it.
+6. **Deploy the service** that uses the change ([deploy-backend-service.md](deploy-backend-service.md)).
+7. **Check:** run `node scripts/migrate.js test` again; it should say "already up to date".
 
 ## Undo
-There are no automatic down-migrations. Write a new migration that reverses the change (e.g. drop the new column) and apply it the same way. Before risky changes, take a backup: Supabase → Database → Backups (paid plans), or export the affected tables.
+There are no automatic down-migrations. Write a new migration that reverses the change (e.g. drop the new column) and apply it the same way. Before a risky change, export the affected tables first.
 
-## Gotchas
-- **Notification types:** a new type must be added to the `notifications_type_check` constraint first (like `0019`), or inserts fail silently in the producing service.
-- **Migrations are immutable** once applied anywhere. Never edit an applied file; add a new one.
-- **Prod** is unused today; apply there only as part of the production build-out (`migrate.js prod --confirm-prod`).
+## Rules
+- **Migrations are immutable.** Never edit or rename a file once it is applied anywhere; `migrate.js` stops with a checksum error. Add a new file instead.
+- **Order is always Dev → Test → Prod.**
+- **New notification types** must be added to the `notifications_type_check` constraint in a migration first (see `0019`), or inserts fail silently in the producing service.
+- Some numbers appear twice (`0008_*`, `0009_*`, `0017_*`). That is fine: the ledger uses the full file name.
+- **Prod:** when production is built, bring it up with `node scripts/migrate.js prod --confirm-prod` (see the aivorah-db README for the baseline step).
