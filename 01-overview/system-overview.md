@@ -52,10 +52,11 @@ Supabase projects: **Dev** `evlqkcozespsfrnuhevf`, **Test** `xmwzifxlpmgsrxgxsga
 
 - **Branches**: feature branch → PR → merge to `master`/`main` → auto-deploy. No direct pushes.
 - **Tests**: frontend tests sit next to the feature (`__tests__/unit`, `__tests__/integration`); services use `tests/`. E2E lives only in `aivorah-e2e-tests`.
-- **CI**: CircleCI (`build_and_test` → triggers E2E against the Vercel preview). CircleCI and GitHub Actions are currently billing-blocked/unreliable; GitLab free tier is used as fallback. `master` lint currently fails on pre-existing lint debt.
+- **CI**: CircleCI `build_and_test` (lint, tests, build), then `trigger-e2e` runs the E2E smoke suite against the Vercel preview. GitLab (free tier) is available as a fallback runner. Run the same checks locally before every PR.
 - **Code layout (frontend)**: `src/screens/<persona>/<feature>/{Screen.tsx, components/, hooks/, services/, utils/, types.ts, __tests__/}`.
 
 ## More detail
 
 - [repositories.md](repositories.md) — every repo, what it does, where it deploys
-- `aivorah-frontend/docs/*.md` — older architecture notes (Aug 2026, partly out of date)
+- [architecture/](architecture/) — repo, service and feature maps, data flow, Qdrant collections, notifications design
+- [../03-runbooks/](../03-runbooks/) — deploy, migrations, key rotation, service down

@@ -1,6 +1,6 @@
 # Access inventory
 
-_Last verified: 2026-10-14_
+_Last verified: 2026-11-03_
 
 **Rule: no secret values in this repo — ever.** This file says *what* access exists, *where* the secret lives, and *who* grants it. Secrets are handed over through a password manager / direct dashboard invite, never chat or email.
 
@@ -10,15 +10,15 @@ Legend for "Transfer": 🔲 not done · ✅ done
 
 | Platform | Used for | Account / project | Owner today | Receiver needs | Transfer |
 |---|---|---|---|---|---|
-| GitHub | All code | Org `aivorah24` | Saimohan R | Org member (admin) | 🔲 |
-| GitHub (personal) | Monolith `ai-mentor` | `saimohan24092003/ai-mentor` | Saimohan R | Repo transferred to `aivorah24` | 🔲 |
-| Vercel | Frontend hosting | Team `aivorah24-9470s-projects`, project `aivorah-frontend` | Saimohan R | Team member | 🔲 |
-| Render | All microservices | Workspace "My Workspace" (`tea-d3aftbemcj7s739223l0`) | Saimohan R | Workspace member; env vars live here | 🔲 |
+| GitHub | All code (26 repos) | Account `aivorah24` (a user account, not an org) | Company (`aivorah24@gmail.com`) | Collaborator on each repo (write) | 🔲 |
+| GitHub | Monolith `ai-mentor` | `aivorah24/ai-mentor` | Company | Collaborator (same as above) | ✅ moved to `aivorah24` |
+| Vercel | Frontend hosting | Account `aivorah24-9470` (Hobby), project `aivorah-frontend` | Company | Team seat (needs Vercel Pro) or the company login | 🔲 |
+| Render | All 20 services | Workspace "My Workspace" (`tea-d9u4igjm8hqs73egspbg`), login `aivorah24@gmail.com` | Company | Workspace member (needs Render Pro) or the company login; env vars live here | 🔲 |
 | Supabase | Postgres DB | Dev `evlqkcozespsfrnuhevf`, Test `xmwzifxlpmgsrxgxsgan`, Prod `jwlepxmclbkrmfzrumch` | Saimohan R | Org member | 🔲 |
 | Firebase | Auth (all users) | Project `ai-learning-platform-c1308` | Saimohan R | Project Owner/Editor | 🔲 |
 | Google Cloud | Monolith (Cloud Run), Firebase backing project | Same Google account as Firebase | Saimohan R | IAM Owner/Editor | 🔲 |
-| Qdrant Cloud | Vector DB (syllabus/lesson content) | Cluster in `QDRANT_URL` | Saimohan R | Account member | 🔲 |
-| CircleCI | Frontend CI | Project `gh/aivorah24/aivorah-frontend` | Saimohan R | Org member · ⚠️ billing-blocked | 🔲 |
+| Qdrant Cloud | Vector DB (`QDRANT_COLLECTIONS.md`) | Cluster `ai-mentor` in account "Base Account" | Saimohan R → company | `aivorah24@gmail.com` invited as Admin; make it Owner after it accepts | 🔲 |
+| CircleCI | Frontend CI | Project `gh/aivorah24/aivorah-frontend` | Saimohan R | Org member; billing on a company card | 🔲 |
 | GitLab | Fallback CI | — | Saimohan R | Member | 🔲 |
 | Resend | Transactional email | API key in `RESEND_API_KEY` | Saimohan R | Account member + domain | 🔲 |
 | Gmail SMTP | Email fallback | `EMAIL_USER` / app password `EMAIL_PASS` | Saimohan R | New app password | 🔲 |
@@ -64,11 +64,11 @@ Legend for "Transfer": 🔲 not done · ✅ done
 
 Source: `.env` / `.env.example` names in each repo on 2026-10-14. Render may have extra vars — Render is the source of truth.
 
-## Security actions before handover
+## Security checklist at sign-off
 
-| # | Action | Status |
+| # | Action | How |
 |---|---|---|
-| 1 | Local `ai-mentor` clone has a GitHub token embedded in its git remote URL → revoke that token in GitHub settings and reset the remote to a clean URL | 🔲 |
-| 2 | `aivorah-school-admin-service` resolves admin scope from an `adminEmail` request param without a token check → fix before wider rollout | 🔲 |
-| 3 | Rotate shared keys (Supabase service keys, Firebase service account, LLM keys) once the receiver has access, so departing staff keys stop working | 🔲 |
-| 4 | Remove departing accounts from GitHub, Vercel, Render, Supabase, Firebase after sign-off | 🔲 |
+| 1 | Revoke the GitHub CLI token of the departing developer's personal GitHub account | GitHub → Settings → Applications → Authorized OAuth Apps → GitHub CLI → Revoke |
+| 2 | Turn on token checks for the school-admin service | Render → `aivorah-school-admin-service` → Environment → `AUTH_ENFORCE=enforce`, then test the School Admin screens |
+| 3 | Rotate shared keys into company-owned accounts (Cloudinary, Resend, Gmail app password, Qdrant, Groq, Gemini, ElevenLabs, Mistral, Hugging Face, NVIDIA, News API) | [rotate-api-key runbook](../03-runbooks/rotate-api-key.md) |
+| 4 | Remove departing accounts from GitHub, Vercel, Render, Supabase, Firebase and Qdrant | Each platform's member settings |
