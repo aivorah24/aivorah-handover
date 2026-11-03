@@ -4,30 +4,30 @@ _Last verified: 2026-11-03_
 
 **Rule: no secret values in this repo — ever.** This file says *what* access exists, *where* the secret lives, and *who* grants it. Secrets are handed over through a password manager / direct dashboard invite, never chat or email.
 
-Legend for "Transfer": 🔲 not done · ✅ done
+Legend for "Transfer": ✅ under the company account
 
 ## Platforms
 
 | Platform | Used for | Account / project | Owner today | Receiver needs | Transfer |
 |---|---|---|---|---|---|
-| GitHub | All code (26 repos) | Account `aivorah24` (a user account, not an org) | Company (`aivorah24@gmail.com`) | Collaborator on each repo (write) | 🔲 |
-| GitHub | Monolith `ai-mentor` | `aivorah24/ai-mentor` | Company | Collaborator (same as above) | ✅ moved to `aivorah24` |
-| Vercel | Frontend hosting | Account `aivorah24-9470` (Hobby), project `aivorah-frontend` | Company | Team seat (needs Vercel Pro) or the company login | 🔲 |
-| Render | All 20 services | Workspace "My Workspace" (`tea-d9u4igjm8hqs73egspbg`), login `aivorah24@gmail.com` | Company | Workspace member (needs Render Pro) or the company login; env vars live here | 🔲 |
-| Supabase | Postgres DB | Dev `evlqkcozespsfrnuhevf`, Test `xmwzifxlpmgsrxgxsgan`, Prod `jwlepxmclbkrmfzrumch` | Saimohan R | Org member | 🔲 |
-| Firebase | Auth (all users) | Project `ai-learning-platform-c1308` | Saimohan R | Project Owner/Editor | 🔲 |
-| Google Cloud | Monolith (Cloud Run), Firebase backing project | Same Google account as Firebase | Saimohan R | IAM Owner/Editor | 🔲 |
-| Qdrant Cloud | Vector DB (`QDRANT_COLLECTIONS.md`) | Cluster `ai-mentor` in account "Base Account" | Saimohan R → company | `aivorah24@gmail.com` invited as Admin; make it Owner after it accepts | 🔲 |
-| CircleCI | Frontend CI | Project `gh/aivorah24/aivorah-frontend` | Saimohan R | Org member; billing on a company card | 🔲 |
-| GitLab | Fallback CI | — | Saimohan R | Member | 🔲 |
-| Resend | Transactional email | API key in `RESEND_API_KEY` | Saimohan R | Account member + domain | 🔲 |
-| Gmail SMTP | Email fallback | `EMAIL_USER` / app password `EMAIL_PASS` | Saimohan R | New app password | 🔲 |
-| Cloudinary | Image/file storage | `CLOUDINARY_*` | Saimohan R | Account member | 🔲 |
-| ElevenLabs | Voice (stories, read aloud) | `ELEVENLABS_API_KEY` | Saimohan R | Account member | 🔲 |
-| LLM providers | AI features | Gemini, Groq, OpenRouter, Cerebras, NVIDIA NIM, (monolith: OpenAI, Anthropic, Mistral, HF, Deepgram) | Saimohan R | New keys under company account | 🔲 |
-| Razorpay | Payments (monolith only) | `RAZORPAY_*` | Saimohan R | Account member | 🔲 |
+| GitHub | All code (26 repos) | Company account `aivorah24` | Company | Collaborator on each repo (write) | ✅ |
+| GitHub | Monolith `ai-mentor` | `aivorah24/ai-mentor` | Company | Collaborator (same as above) | ✅ |
+| Vercel | Frontend hosting | Account `aivorah24-9470` (Hobby), project `aivorah-frontend` | Company | Team seat (needs Vercel Pro) or the company login | ✅ |
+| Render | All 20 services | Workspace "My Workspace" (`tea-d9u4igjm8hqs73egspbg`), login `aivorah24@gmail.com` | Company | Workspace member (needs Render Pro) or the company login; env vars live here | ✅ |
+| Supabase | Postgres DB | Dev `evlqkcozespsfrnuhevf`, Test `xmwzifxlpmgsrxgxsgan`, Prod `jwlepxmclbkrmfzrumch` | Company | Org member | ✅ |
+| Firebase | Auth (all users) | Project `ai-learning-platform-c1308` | Company | Project Owner/Editor | ✅ |
+| Google Cloud | Monolith (Cloud Run), Firebase backing project | Same Google account as Firebase | Company | IAM Owner/Editor | ✅ |
+| Qdrant Cloud | Vector DB (`QDRANT_COLLECTIONS.md`) | Cluster `ai-mentor` in account "Base Account" | Company (moving) | `aivorah24@gmail.com` invited as Admin; set it to Owner once accepted | In progress (4 Nov) |
+| CircleCI | Frontend CI | Project `gh/aivorah24/aivorah-frontend` | Company | Org member; billing on a company card | ✅ |
+| GitLab | Fallback CI | — | Company | Member | ✅ |
+| Resend | Transactional email | API key in `RESEND_API_KEY` | Company | Account member + domain | ✅ |
+| Gmail SMTP | Email fallback | `EMAIL_USER` / app password `EMAIL_PASS` | Company | New app password | ✅ |
+| Cloudinary | Image/file storage | `CLOUDINARY_*` | Company | Account member | ✅ |
+| ElevenLabs | Voice (stories, read aloud) | `ELEVENLABS_API_KEY` | Company | Account member | ✅ |
+| LLM providers | AI features | Gemini, Groq, OpenRouter, Cerebras, NVIDIA NIM, (monolith: OpenAI, Anthropic, Mistral, HF, Deepgram) | Company | New keys under company account | ✅ |
+| Razorpay | Payments (monolith only) | `RAZORPAY_*` | Company | Account member | ✅ |
 
-> Many API keys (LLM, email) are on free tiers tied to personal accounts. During handover they should be **re-issued under a company-owned account**, then swapped in Render env vars.
+> To change any provider key, follow `03-runbooks/rotate-api-key.md`.
 
 ## Where secrets live
 
