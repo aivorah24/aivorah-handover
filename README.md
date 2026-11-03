@@ -17,7 +17,7 @@ Single place for the Aivorah engineering handover: system overview, access, runb
 |---|---|---|
 | [01-overview](01-overview/) | Architecture, repos, environments, request flow. Detailed maps in [`architecture/`](01-overview/architecture/) (moved from `aivorah-frontend/docs`) | ✅ v1 |
 | [02-access](02-access/) | Every account/platform, owner, what must be transferred | ✅ v1 |
-| [03-runbooks](03-runbooks/) | Deploy, rollback, migrations, key rotation, E2E | ⏳ todo |
+| [03-runbooks](03-runbooks/) | Deploy backend/frontend, DB migrations, key rotation, service down, bulk upload | ✅ v1 |
 | [04-open-work](04-open-work/) | Open PRs, known bugs, tech debt, risks | ⏳ todo |
 | [05-decisions](05-decisions/) | ADRs — one file per significant decision | ⏳ todo |
 | [06-kt](06-kt/) | KT plan, session notes + recordings, sign-off | ⏳ todo |
