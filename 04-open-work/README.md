@@ -25,4 +25,3 @@ What the team can pick up next, in rough order of value. Nothing here blocks the
 - **Old branches:** frontend (~100), e2e-tests (~40) and learning-paths (~37) have many merged or stale branches to prune.
 - **CircleCI `trigger-e2e`:** update the CircleCI API token it uses to start the E2E project.
 
-Older notes (assignment bug write-up from 16 Oct) are in `08-archive/`.

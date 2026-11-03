@@ -1,6 +1,6 @@
 # Aivorah — Handover
 
-Single place for the Aivorah engineering handover: system overview, access, runbooks, open work, KT sessions and meeting notes.
+Single place for the Aivorah engineering handover: system overview, access, runbooks and open work.
 
 | | |
 |---|---|
@@ -19,11 +19,6 @@ Single place for the Aivorah engineering handover: system overview, access, runb
 | [02-access](02-access/) | Every account/platform, owner, what must be transferred | ✅ v1 |
 | [03-runbooks](03-runbooks/) | Deploy backend/frontend, DB migrations, key rotation, service down, bulk upload | ✅ v1 |
 | [04-open-work](04-open-work/) | What to pick up next: decisions, security hardening, improvements, housekeeping | ✅ v1 |
-| [05-decisions](05-decisions/) | ADRs — one file per significant decision | ⏳ todo |
-| [06-kt](06-kt/) | KT plan, session notes + recordings, sign-off | [plan](06-kt/README.md) |
-| [07-meetings](07-meetings/) | `YYYY-MM-DD-topic.md` meeting notes | template ready |
-| [08-archive](08-archive/) | Historical plans and checklists, kept for context only (may be out of date) | archive |
-| [status](status/) | Weekly handover status updates (newest = latest) | ✅ first update |
 
 ## Handover checklist
 
@@ -33,10 +28,6 @@ Single place for the Aivorah engineering handover: system overview, access, runb
 - [x] Monolith repo moved to the `aivorah24` GitHub account
 - [ ] Runbooks written and dry-run by receiver
 - [ ] Open work list reviewed together
-- [ ] KT sessions completed (see `06-kt/`)
+- [ ] KT sessions completed
 - [ ] Receiver deploys one change end-to-end unaided
 - [ ] Sign-off by receiver and manager
-
-## How updates are shared
-
-Each update is a new file in [`status/`](status/) named `YYYY-MM-DD.md` (what shipped, in progress, risks/blockers, next). Meeting notes go in [`07-meetings/`](07-meetings/) using the [template](07-meetings/_template.md).
