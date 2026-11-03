@@ -13,36 +13,13 @@ What the team can pick up next, in rough order of value. Nothing here blocks the
 - **Admin lists.** Admin email lists in `aivorah-platform-admin-service` (`middleware/auth.js`) and `aivorah-school-admin-service` (`services/adminScope.js`) contain individual emails. Keep only `ADMIN_EMAILS` from Render env vars.
 - **Key rotation** at sign-off: see the security checklist in `02-access/access-inventory.md`.
 
-## 3. Open pull requests
-Review each one: merge, update, or close.
-
-| Repo | PR | What it does | Suggested next step |
-|---|---|---|---|
-| ai-mentor | #189 | Parent link role check, quiz upload size limit, dead code removal | Review and merge |
-| ai-mentor | #187 | Use Supabase Storage for NCERT book PDFs | Review and merge |
-| assignments | #18 | Page cap for big PDFs, clear error for empty worksheets, faster Gemini | Review and merge (mergeable) |
-| students | #7 | Mistake trends count only real quiz attempts | Review and merge |
-| frontend | #141 | Learning-path subjects/units for parent and teacher; dashboard tab fix | Review and merge |
-| frontend | #110 | Learning progress and mastery tracking | Check overlap with recent commits on `master`, then merge or close |
-| frontend | #105 | Platform Overview screen for Aivorah Admin | Review against the current admin screens |
-| frontend | #45, #46 | Hide internal topic codes in assignment chips; CircleCI env file fix | Rebase and review |
-| learning-paths | #9, #13 | Grounded lesson-topic generation; topic enrichment | Rebase and review |
-| learning-paths | #19 | Literature "Listen" text + Qdrant vault ingestion | Optional future work (see `QDRANT_COLLECTIONS.md`); rebase before use |
-| learning-paths | #31 | Retry dropped connections when copying CISCE data | Review and merge |
-| schedule | #4 | Remove the old `/timetable` route (now in timetable-resources) | Confirm no caller, then merge |
-| school-admin | #1 | Remove the old `/resources` folder route (now in timetable-resources) | Confirm no caller, then merge |
-| aivorah-db | #3 | CI check for migration PRs | Review |
-| e2e-tests | #41, #43, #27, #12 | New and updated E2E tests | Run locally, then merge |
-| e2e-tests | #8, #26 | Test credentials setup; lint CI | Review |
-| e2e-tests | #13 | Old `CLAUDE.md` rules update | Close (replaced by `CONTRIBUTING.md`) |
-
-## 4. Product improvements
+## 3. Product improvements
 - **Teacher promote** should also move the curriculum at grade boundaries (IB PYP → IB MYP), the same way School Admin promote does (`aivorah-students-service`).
 - **Curriculum logos** for IB PYP, IB DP and ICSE (upload through branding logos).
 - **Bulk upload:** show "couldn't read this worksheet" when a quiz comes back with 0 tasks; skip an AI provider for a while after quota errors (see the bulk-upload runbook).
 - **Qdrant vault:** switch NCERT content to the richer vault collection when it is fully built (`QDRANT_COLLECTIONS.md`).
 
-## 5. Housekeeping
+## 4. Housekeeping
 - **Profile service tests:** two integration test files need the Supabase test mock to support `.in()`; the app code itself is fine.
 - **Old screens:** `aivorah-frontend/src/.legacy-screens/` can be deleted once the few remaining imports move to the current screens.
 - **Old branches:** frontend (~100), e2e-tests (~40) and learning-paths (~37) have many merged or stale branches to prune.
